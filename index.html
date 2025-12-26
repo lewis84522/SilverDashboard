@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>白银资产投资供需仪表盘</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">SilverDashboard · 全球白银供需平衡</p>
+        <h1>白银资产投资系统性 Dashboard</h1>
+        <p class="subhead">
+          汇总全球供需关键数据，结合现货、库存与行业需求，支持联网刷新最新数据。
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button id="refreshButton" class="primary">立即刷新</button>
+        <div class="timestamp">
+          <span>最近刷新：</span>
+          <strong id="lastUpdated">未刷新</strong>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel highlight">
+        <div class="panel-header">
+          <h2>实时市场概览</h2>
+          <p>数据来自开放 API，可联网获取当日最新行情。</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>现货银价 (USD/oz)</h3>
+            <p class="value" id="spotPrice">--</p>
+            <p class="meta" id="spotMeta">来源：metals.live · 实时</p>
+          </article>
+          <article class="card">
+            <h3>金银比</h3>
+            <p class="value" id="goldSilverRatio">--</p>
+            <p class="meta" id="ratioMeta">来源：metals.live · 实时</p>
+          </article>
+          <article class="card">
+            <h3>日内波动</h3>
+            <p class="value" id="intradayMove">--</p>
+            <p class="meta">根据最新现货价格估算</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>供给端 (Supply)</h2>
+          <p>按来源拆分，展示全球白银供给的结构性变化。</p>
+        </div>
+        <div class="grid grid-2" id="supplyCards"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>需求端 (Demand)</h2>
+          <p>按应用场景拆分，观察工业与投资需求的分化。</p>
+        </div>
+        <div class="grid grid-2" id="demandCards"></div>
+      </section>
+
+      <section class="panel balance">
+        <div>
+          <h2>年度供需平衡</h2>
+          <p class="subhead">基于最新年度统计估算的供需缺口。</p>
+        </div>
+        <div class="balance-metrics">
+          <div>
+            <span>总供给</span>
+            <strong id="totalSupply">--</strong>
+          </div>
+          <div>
+            <span>总需求</span>
+            <strong id="totalDemand">--</strong>
+          </div>
+          <div>
+            <span>供需差额</span>
+            <strong id="balanceGap">--</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>数据来源与更新频率</h2>
+          <p>供需数据来源多样化，涵盖产量、库存、行业需求与市场行情。</p>
+        </div>
+        <div class="sources" id="sourceList"></div>
+      </section>
+
+      <section class="panel commentary">
+        <div class="panel-header">
+          <h2>投资评论</h2>
+          <p>结合供需平衡与行业趋势，形成观察要点。</p>
+        </div>
+        <ul id="commentaryList"></ul>
+      </section>
+
+      <section class="panel settings">
+        <div class="panel-header">
+          <h2>API 设置（可选）</h2>
+          <p>如需接入其他数据源或大模型 API，请在此配置。</p>
+        </div>
+        <form id="settingsForm">
+          <div class="grid grid-2">
+            <label>
+              Quandl/Nasdaq Data Link API Key
+              <input type="password" name="quandlKey" placeholder="可选" />
+            </label>
+            <label>
+              FRED API Key
+              <input type="password" name="fredKey" placeholder="可选" />
+            </label>
+          </div>
+          <div class="divider"></div>
+          <h3>大模型 API 设置</h3>
+          <div class="grid grid-2">
+            <label>
+              API Base URL
+              <input type="url" name="llmBaseUrl" placeholder="https://api.example.com" />
+            </label>
+            <label>
+              API Key
+              <input type="password" name="llmApiKey" placeholder="可选" />
+            </label>
+            <label>
+              Model
+              <input type="text" name="llmModel" placeholder="例如 gpt-4o-mini" />
+            </label>
+          </div>
+          <button type="submit" class="primary">保存设置</button>
+          <p class="hint">设置将保存在浏览器本地存储，不上传服务器。</p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>SilverDashboard · 数据仅供研究参考，请结合自身风险偏好。</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
